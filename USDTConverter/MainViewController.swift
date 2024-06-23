@@ -136,8 +136,8 @@ class MainViewController: UIViewController {
         setupLayout()
         Task {
             let model = try await presenter.getCurrencyModel()
-            usdtUsdValueLabel.text = String(model?.usdtCourseInUsd ?? 0)
-            usdtRubValueLabel.text = String(model?.usdtCourseInRub ?? 0)
+            usdtUsdValueLabel.text = String(model?.usdtCourseInUsd ?? 0) + " USD"
+            usdtRubValueLabel.text = String(model?.usdtCourseInRub ?? 0) + " RUB"
         }
     }
     
