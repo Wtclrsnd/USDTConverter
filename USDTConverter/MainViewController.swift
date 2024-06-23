@@ -130,7 +130,7 @@ class MainViewController: UIViewController {
         textField.layer.borderColor = UIColor.systemPink.cgColor
         textField.layer.borderWidth = 1
         textField.keyboardType = .numberPad
-        textField.placeholder = "Salary in USDT per hour"
+        textField.placeholder = "Salary in USD per hour"
         return textField
     }()
     
