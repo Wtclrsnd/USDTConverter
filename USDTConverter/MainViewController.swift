@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    private let presenter = MainPresenter(UsdtService())
+    private let presenter = MainPresenter(NetworkService())
     
     private let inset: CGFloat = 20
     
@@ -19,7 +19,6 @@ class MainViewController: UIViewController {
     private var usdtBuyRubValue: Double = 0
     
     private let defaultWorkedHours: Int = 40
-    private var calculatedSalary: Double = 0
     
     // MARK: - COURSE UI
     private lazy var nameLabel: UILabel = {
@@ -31,69 +30,31 @@ class MainViewController: UIViewController {
     
     private lazy var courseStack: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 10
-        return stack
-    }()
-    
-    private lazy var sellStack: UIStackView = {
-        let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         stack.spacing = 10
         return stack
     }()
     
-    private lazy var usdtSellLabel: UILabel = {
+    private lazy var usdtCourseLabel: UILabel = {
         let label = UILabel()
-        label.text = "SELL"
+        label.text = "Course"
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .systemPink
         label.textAlignment = .center
         return label
     }()
     
-    private lazy var usdtSellUsdValueLabel: UILabel = {
+    private lazy var usdtUsdValueLabel: UILabel = {
         let label = UILabel()
         label.text = "\(usdtSellUsdValue) USD"
         label.textAlignment = .center
         return label
     }()
     
-    private lazy var usdtSellRubValueLabel: UILabel = {
+    private lazy var usdtRubValueLabel: UILabel = {
         let label = UILabel()
         label.text = "\(usdtSellRubValue) RUB"
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var buyStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.distribution = .fillEqually
-        stack.spacing = 10
-        return stack
-    }()
-    
-    private lazy var usdtBuyLabel: UILabel = {
-        let label = UILabel()
-        label.text = "BUY"
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .systemPink
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var usdtBuyUsdValueLabel: UILabel = {
-        let label = UILabel()
-        label.text = "\(usdtBuyUsdValue) USD"
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var usdtBuyRubValueLabel: UILabel = {
-        let label = UILabel()
-        label.text = "\(usdtBuyRubValue) RUB"
         label.textAlignment = .center
         return label
     }()
@@ -147,7 +108,7 @@ class MainViewController: UIViewController {
     
     private lazy var resultSalaryLabel: UILabel = {
         let label = UILabel()
-        label.text = "Result salary \(calculatedSalary) RUB"
+        label.text = "Please enter salary and hours"
         label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.textColor = .systemPink
         label.textAlignment = .center
@@ -156,13 +117,28 @@ class MainViewController: UIViewController {
     
     
     @objc private func convertSalaryButtonTapped() {
-        presenter.convert()
+        guard let salary = salaryTextField.text,
+              let hours = hoursTextField.text else { return }
+        if salary.isEmpty || hours.isEmpty {
+            resultSalaryLabel.text = "Enter salary and hours"
+            return
+        }
+        if let salary = Double(salary), let hours = Int(hours) {
+            let calculatedSalary = presenter.calculateSalaryInRub(salary: salary, hours: hours)
+            let calculatedSalaryString = String(format: "%.1f", calculatedSalary)
+            resultSalaryLabel.text = "Result salary \(calculatedSalaryString) RUB"
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLayout()
+        Task {
+            let model = try await presenter.getCurrencyModel()
+            usdtUsdValueLabel.text = String(model?.usdtCourseInUsd ?? 0)
+            usdtRubValueLabel.text = String(model?.usdtCourseInRub ?? 0)
+        }
     }
     
     private func setupLayout() {
@@ -195,16 +171,10 @@ extension MainViewController {
         view.addSubview(courseStack)
         courseStack.translatesAutoresizingMaskIntoConstraints = false
         
-        courseStack.addArrangedSubview(sellStack)
-        courseStack.addArrangedSubview(buyStack)
-        
-        sellStack.addArrangedSubview(usdtSellLabel)
-        sellStack.addArrangedSubview(usdtSellUsdValueLabel)
-        sellStack.addArrangedSubview(usdtSellRubValueLabel)
-        
-        buyStack.addArrangedSubview(usdtBuyLabel)
-        buyStack.addArrangedSubview(usdtBuyUsdValueLabel)
-        buyStack.addArrangedSubview(usdtBuyRubValueLabel)
+        courseStack.addArrangedSubview(usdtCourseLabel)
+        courseStack.addArrangedSubview(usdtUsdValueLabel)
+        courseStack.addArrangedSubview(usdtRubValueLabel)
+    
         
         courseStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: inset).isActive = true
         courseStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: inset).isActive = true

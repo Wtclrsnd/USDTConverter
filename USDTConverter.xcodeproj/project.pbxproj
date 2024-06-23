@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		72416C772C288570005DC51F /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C762C288570005DC51F /* MainPresenter.swift */; };
 		72416C792C28857B005DC51F /* UsdtDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C782C28857B005DC51F /* UsdtDTO.swift */; };
-		72416C7B2C288595005DC51F /* UsdtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C7A2C288595005DC51F /* UsdtService.swift */; };
-		72416C7E2C2886CE005DC51F /* EndpointFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C7D2C2886CE005DC51F /* EndpointFabric.swift */; };
+		72416C7B2C288595005DC51F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C7A2C288595005DC51F /* NetworkService.swift */; };
+		72416C7E2C2886CE005DC51F /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C7D2C2886CE005DC51F /* Endpoints.swift */; };
 		72416C812C289055005DC51F /* InsetedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C802C289055005DC51F /* InsetedTextField.swift */; };
+		72416C832C289A76005DC51F /* MoneyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C822C289A76005DC51F /* MoneyDTO.swift */; };
+		72416C852C289B87005DC51F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72416C842C289B87005DC51F /* Model.swift */; };
 		72AC043E2C28810C007A2EC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC043D2C28810C007A2EC6 /* AppDelegate.swift */; };
 		72AC04402C28810C007A2EC6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC043F2C28810C007A2EC6 /* SceneDelegate.swift */; };
 		72AC04422C28810C007A2EC6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC04412C28810C007A2EC6 /* MainViewController.swift */; };
@@ -22,9 +24,11 @@
 /* Begin PBXFileReference section */
 		72416C762C288570005DC51F /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		72416C782C28857B005DC51F /* UsdtDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsdtDTO.swift; sourceTree = "<group>"; };
-		72416C7A2C288595005DC51F /* UsdtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsdtService.swift; sourceTree = "<group>"; };
-		72416C7D2C2886CE005DC51F /* EndpointFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointFabric.swift; sourceTree = "<group>"; };
+		72416C7A2C288595005DC51F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		72416C7D2C2886CE005DC51F /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		72416C802C289055005DC51F /* InsetedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetedTextField.swift; sourceTree = "<group>"; };
+		72416C822C289A76005DC51F /* MoneyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyDTO.swift; sourceTree = "<group>"; };
+		72416C842C289B87005DC51F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		72AC043A2C28810C007A2EC6 /* USDTConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = USDTConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72AC043D2C28810C007A2EC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72AC043F2C28810C007A2EC6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,14 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		72416C7C2C28859A005DC51F /* UsdtService */ = {
+		72416C7C2C28859A005DC51F /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				72416C782C28857B005DC51F /* UsdtDTO.swift */,
-				72416C7A2C288595005DC51F /* UsdtService.swift */,
-				72416C7D2C2886CE005DC51F /* EndpointFabric.swift */,
+				72416C822C289A76005DC51F /* MoneyDTO.swift */,
+				72416C7A2C288595005DC51F /* NetworkService.swift */,
+				72416C7D2C2886CE005DC51F /* Endpoints.swift */,
 			);
-			path = UsdtService;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		72416C7F2C289041005DC51F /* UIElements */ = {
@@ -87,7 +92,8 @@
 				72AC043F2C28810C007A2EC6 /* SceneDelegate.swift */,
 				72AC04412C28810C007A2EC6 /* MainViewController.swift */,
 				72416C762C288570005DC51F /* MainPresenter.swift */,
-				72416C7C2C28859A005DC51F /* UsdtService */,
+				72416C842C289B87005DC51F /* Model.swift */,
+				72416C7C2C28859A005DC51F /* Service */,
 				72AC04462C28810D007A2EC6 /* Assets.xcassets */,
 				72AC04482C28810D007A2EC6 /* LaunchScreen.storyboard */,
 				72AC044B2C28810D007A2EC6 /* Info.plist */,
@@ -166,9 +172,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				72AC04422C28810C007A2EC6 /* MainViewController.swift in Sources */,
-				72416C7B2C288595005DC51F /* UsdtService.swift in Sources */,
+				72416C832C289A76005DC51F /* MoneyDTO.swift in Sources */,
+				72416C7B2C288595005DC51F /* NetworkService.swift in Sources */,
 				72AC043E2C28810C007A2EC6 /* AppDelegate.swift in Sources */,
-				72416C7E2C2886CE005DC51F /* EndpointFabric.swift in Sources */,
+				72416C7E2C2886CE005DC51F /* Endpoints.swift in Sources */,
+				72416C852C289B87005DC51F /* Model.swift in Sources */,
 				72AC04402C28810C007A2EC6 /* SceneDelegate.swift in Sources */,
 				72416C812C289055005DC51F /* InsetedTextField.swift in Sources */,
 				72416C772C288570005DC51F /* MainPresenter.swift in Sources */,
