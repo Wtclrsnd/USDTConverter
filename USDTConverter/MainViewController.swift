@@ -231,7 +231,7 @@ extension MainViewController {
         
         convertSalaryButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: inset).isActive = true
         convertSalaryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        convertSalaryButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -inset).isActive = true
+        convertSalaryButton.topAnchor.constraint(equalTo: salaryStack.bottomAnchor, constant: inset).isActive = true
         convertSalaryButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }
